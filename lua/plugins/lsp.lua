@@ -13,15 +13,18 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = {
+            'saghen/blink.cmp',
             { 'j-hui/fidget.nvim', opts = {} },
         },
         config = function()
-            require('lspconfig').lua_ls.setup {}
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            require('lspconfig').lua_ls.setup { capabilities = capabilities }
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function()
                     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
                     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+                    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format)
                     vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration)
                 end
             })
