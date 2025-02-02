@@ -19,7 +19,7 @@ return {
                 'vimdoc',
             },
             auto_install = false,
-            hightlight = {
+            highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = { 'ruby' }
             },
