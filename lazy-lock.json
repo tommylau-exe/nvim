@@ -9,7 +9,7 @@
   "mini.pairs": { "branch": "main", "commit": "1a3e73649c0eaef2f6c48ce1e761c6f0a7c11918" },
   "mini.surround": { "branch": "main", "commit": "ceddea5fe862f13b279d9bbe81c3327a0e66d56b" },
   "nvim-lspconfig": { "branch": "master", "commit": "f98fa715acc975c2dd5fb5ba7ceddeb1cc725ad2" },
-  "nvim-treesitter": { "branch": "master", "commit": "4988b7068001b3a772c7cc738708341e612e3c26" },
+  "nvim-treesitter": { "branch": "master", "commit": "73b68cb943cd6718bdee318a70874620070255d4" },
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "dae2eac9d91464448b584c7949a31df8faefec56" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
