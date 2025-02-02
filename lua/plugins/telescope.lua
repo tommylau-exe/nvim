@@ -26,11 +26,9 @@ return {
         vim.api.nvim_create_autocmd('LspAttach', {
             callback = function()
                 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_workspace_symbols)
-
-                local cursor = require('telescope.themes').get_cursor()
-                vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions(cursor) end)
-                vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references(cursor) end)
-                vim.keymap.set('n', 'gs', function() require('telescope.builtin').lsp_document_symbols(cursor) end)
+                vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions)
+                vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references)
+                vim.keymap.set('n', 'gs', require('telescope.builtin').lsp_document_symbols)
             end
         })
     end,
