@@ -13,12 +13,12 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'saghen/blink.cmp',
             { 'j-hui/fidget.nvim', opts = {} },
         },
         config = function()
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
             require('lspconfig').lua_ls.setup { capabilities = capabilities }
+            require('plugins.lsp.local').setup(capabilities)
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function()
