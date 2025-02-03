@@ -36,4 +36,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.keymap.set('n', '<leader>x', ':.lua<CR>')
+vim.keymap.set('v', '<leader>x', ':lua<CR>')
+
 require('config.lazy')
