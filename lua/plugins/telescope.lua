@@ -21,6 +21,7 @@ return {
         end)
 
         vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files)
+        vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status)
         vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches)
 
         vim.api.nvim_create_autocmd('LspAttach', {
