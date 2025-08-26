@@ -1,16 +1,15 @@
+---@type vim.lsp.Config
 return {
-    cmd = { 'lua-language-server' },
-    filetypes = { 'lua' },
-    root_markers = { '.git', 'luarc.json', vim.uv.cwd() },
-    settings = {
-        Lua = {
-            telemetry = { enable = false },
-            runtime = { version = "LuaJIT" },
-            diagnostics = {
-                disable = { 'missing-parameters', 'missing-fields' },
-            },
-        },
-    },
-    single_file_support = true,
-    log_level = vim.lsp.protocol.MessageType.Warning,
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = {
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
+  },
 }
