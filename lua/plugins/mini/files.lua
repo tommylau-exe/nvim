@@ -11,7 +11,7 @@ MiniDeps.later(function()
     callback = function()
       vim.keymap.set('n', '<leader>p', function()
         local path = (MiniFiles.get_fs_entry() or {}).path
-        require('util').setreg_relative_path(path)
+        require('config.util').setreg_relative_path(path)
       end)
     end
   })
