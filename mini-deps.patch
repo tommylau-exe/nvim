@@ -1,0 +1,23 @@
+diff --git a/lua/mini/deps.lua b/lua/mini/deps.lua
+index 6848de5..ea2069a 100644
+--- a/lua/mini/deps.lua
++++ b/lua/mini/deps.lua
+@@ -901,8 +901,7 @@ H.git_args = {
+   end,
+   clone = function(source, path)
+     local res = {
+-      'clone', '--quiet', '--filter=blob:none',
+-      '--recurse-submodules', '--also-filter-submodules', '--origin', 'origin',
++      'clone', '--quiet', '--filter=blob:none', '--origin', 'origin',
+       source, path,
+     }
+     -- Use `--also-filter-submodules` only with appropriate version
+@@ -919,7 +918,7 @@ H.git_args = {
+   end,
+   -- Using '--tags --force' means conflicting tags will be synced with remote
+   fetch = function()
+-    return { 'fetch', '--quiet', '--tags', '--force', '--recurse-submodules=yes', 'origin' }
++    return { 'fetch', '--quiet', '--tags', '--force', 'origin' }
+   end,
+   set_origin = function(source)
+     return { 'remote', 'set-url', 'origin', source }
