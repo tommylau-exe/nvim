@@ -1,1 +1,3 @@
-require('mini.snippets').setup()
+MiniDeps.later(function()
+  require('mini.snippets').setup()
+end)

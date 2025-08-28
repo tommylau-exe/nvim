@@ -1,1 +1,3 @@
-require('mini.surround').setup()
+MiniDeps.later(function()
+  require('mini.surround').setup()
+end)

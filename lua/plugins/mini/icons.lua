@@ -1,2 +1,4 @@
-require('mini.icons').setup()
-MiniDeps.later(MiniIcons.tweak_lsp_kind)
+MiniDeps.now(function()
+  require('mini.icons').setup()
+  MiniIcons.tweak_lsp_kind()
+end)

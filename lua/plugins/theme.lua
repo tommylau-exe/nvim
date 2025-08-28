@@ -1,3 +1,4 @@
-MiniDeps.add('folke/tokyonight.nvim')
-
-MiniDeps.now(function() vim.cmd [[colorscheme tokyonight]] end)
+MiniDeps.now(function()
+  MiniDeps.add('folke/tokyonight.nvim')
+  vim.cmd('colorscheme tokyonight')
+end)

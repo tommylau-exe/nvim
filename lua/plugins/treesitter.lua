@@ -1,11 +1,11 @@
-MiniDeps.add({
-  source = 'nvim-treesitter/nvim-treesitter',
-  hooks = {
-    post_checkout = function() vim.cmd('TSUpdate') end,
-  },
-})
-
 MiniDeps.later(function()
+  MiniDeps.add({
+    source = 'nvim-treesitter/nvim-treesitter',
+    hooks = {
+      post_checkout = function() vim.cmd('TSUpdate') end,
+    },
+  })
+
   require('nvim-treesitter.configs').setup({
     additional_vim_regex_highlighting = { 'ruby' },
     auto_install = false,

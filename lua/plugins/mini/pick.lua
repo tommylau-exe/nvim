@@ -1,9 +1,7 @@
-require('mini.pick').setup()
-
 MiniDeps.later(function()
+  require('mini.pick').setup()
   vim.ui.select = MiniPick.ui_select
-end)
-MiniDeps.later(function()
+
   vim.keymap.set('n', '<leader><leader>', MiniPick.builtin.files)
   vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files)
   vim.keymap.set('n', '<leader>fw', MiniPick.builtin.grep_live)
