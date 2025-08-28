@@ -7,11 +7,11 @@ MiniDeps.later(function()
 
   vim.api.nvim_create_autocmd('User', {
     pattern = 'MiniFilesBufferCreate',
-    callback = function()
+    callback = function(ev)
       vim.keymap.set('n', '<leader>p', function()
-        local path = (MiniFiles.get_fs_entry() or {}).path
+        local path = (MiniFiles.get_fs_entry(ev.data.buf_id) or {}).path
         require('config.util').setreg_relative_path(path)
-      end)
+      end, { buffer = ev.data.buf_id })
     end
   })
 end)
