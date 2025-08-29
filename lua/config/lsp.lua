@@ -34,6 +34,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- if supported by lsp, enable inline hints
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then return end
+    if not client:supports_method('textDocument/inlayHint', ev.buf) then return end
+
+    vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+  end,
+})
+
 ---@param lsp_name string
 local function enable_if_installed(lsp_name)
   local lsp_cmd = vim.tbl_get(vim.lsp.config, lsp_name, 'cmd', 1)

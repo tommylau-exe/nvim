@@ -12,4 +12,10 @@ return {
     'selene.yml',
     '.git',
   },
+  settings = {
+    Lua = {
+      -- enable inlay hints for parameter names, argument types, etc.
+      hint = { enable = true },
+    },
+  },
 }
