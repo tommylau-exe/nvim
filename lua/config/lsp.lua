@@ -45,6 +45,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- if supported by lsp, enable symbol highlighting under cursor
+vim.opt.updatetime = 400
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then return end
+    if not client:supports_method('textDocument/documentHighlight', ev.buf) then return end
+
+    local group = vim.api.nvim_create_augroup('highlight_symbol', { clear = false })
+    vim.api.nvim_clear_autocmds({ buffer = ev.buf, group = group })
+
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = group,
+      buffer = ev.buf,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      group = group,
+      buffer = ev.buf,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end,
+})
+
+
 ---@param lsp_name string
 local function enable_if_installed(lsp_name)
   local lsp_cmd = vim.tbl_get(vim.lsp.config, lsp_name, 'cmd', 1)
