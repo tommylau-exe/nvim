@@ -27,10 +27,10 @@ vim.opt.inccommand = 'split'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.keymap.set('n', '<esc>', ':nohlsearch<cr>')
-vim.keymap.set('n', '<leader>o', ':b #<cr>')
-vim.keymap.set('n', '<leader>x', ':.lua<cr>')
-vim.keymap.set('v', '<leader>x', ':lua<cr>')
+vim.keymap.set('n', '<esc>', ':nohlsearch<cr>', { silent = true })
+vim.keymap.set('n', '<leader>o', ':b #<cr>', { silent = true })
+vim.keymap.set('n', '<leader>x', ':%lua<cr>', { silent = true })
+vim.keymap.set('v', '<leader>x', ':lua<cr>', { silent = true })
 vim.keymap.set('n', '<leader>p', function()
   local path = vim.fn.expand('%')
   require('config.util').setreg_relative_path(path)
