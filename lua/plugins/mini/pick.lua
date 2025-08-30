@@ -9,9 +9,8 @@ MiniDeps.later(function()
   vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
   vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
 
-  -- TODO: why doesn't this work
   vim.keymap.set('n', '<leader>fc', function()
-    MiniPick.builtin.files({ source = { cwd = vim.fn.stdpath('config') } })
+    MiniPick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } })
   end)
 
   vim.keymap.set('n', '<leader>gf', MiniExtra.pickers.git_files)
