@@ -17,7 +17,16 @@ MiniDeps.later(function()
   end)
 
   vim.keymap.set('n', '<leader>gf', MiniExtra.pickers.git_files)
-  vim.keymap.set('n', '<leader>gb', MiniExtra.pickers.git_branches)
+  vim.keymap.set('n', '<leader>gb', function()
+    MiniExtra.pickers.git_branches({}, {
+      source = {
+        choose = function(item)
+          local branch = item:match('^%*?%s*(%S+)')
+          vim.cmd('Git switch ' .. branch)
+        end,
+      },
+    })
+  end)
 
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function()

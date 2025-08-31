@@ -5,4 +5,3 @@
 [ ] syntax highlighting for graphql inside of string literals
     - https://youtu.be/v3o9YaHBM4Q
 [ ] gitsigns
-[ ] `<leader>gb` mapping to switch git branches
