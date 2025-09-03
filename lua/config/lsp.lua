@@ -78,5 +78,6 @@ local function enable_if_installed(lsp_name)
 end
 enable_if_installed('lua_ls')
 enable_if_installed('ruby_lsp')
+enable_if_installed('sorbet_lsp')
 enable_if_installed('vtsls')
 enable_if_installed('graphql_lsp')
