@@ -69,7 +69,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-
 ---@param lsp_name string
 local function enable_if_installed(lsp_name)
   local lsp_cmd = vim.tbl_get(vim.lsp.config, lsp_name, 'cmd', 1)
