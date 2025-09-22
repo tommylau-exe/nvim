@@ -1,7 +1,6 @@
 require('plugins.mini.ai')
 require('plugins.mini.completion')
 require('plugins.mini.extra')
-require('plugins.mini.files')
 require('plugins.mini.git')
 require('plugins.mini.icons')
 require('plugins.mini.notify')
