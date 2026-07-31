@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>w', function()
       vim.lsp.buf.format({ bufnr = ev.buf, id = ev.data.client_id })
       vim.cmd('write')
-    end, { buffer = ev.buf })
+    end, { buffer = ev.buf, desc = 'Format and write' })
   end,
 })
 
