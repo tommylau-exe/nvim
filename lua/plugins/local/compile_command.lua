@@ -3,6 +3,11 @@
 -- useful for placing command output in a dedicated buffer to inspect and
 -- operate on. e.g. using `gf` on paths in output, yanking selections
 
+---@class CompileCommand.Opts
+---@field vertical_split? boolean Open the output window in a vertical (right) split instead of below
+
+---@class CompileCommand
+---@field args CompileCommand.Opts
 local M = {}
 
 -- thin wrapper around vim.fn.input() that fixes neovide's cursor
@@ -32,40 +37,63 @@ local function get_or_create_window()
   return last_used_window
 end
 
-local buf_count = 0
-local function create_buf()
-  local buf = vim.api.nvim_create_buf(false, true)
-  if buf_count == 0 then
-    vim.api.nvim_buf_set_name(buf, 'Command Output')
-  else
-    vim.api.nvim_buf_set_name(buf, string.format('Command Output (%d)', buf_count))
+local output_buf = nil
+local function get_or_create_buf()
+  if output_buf and vim.api.nvim_buf_is_valid(output_buf) then
+    return output_buf
   end
 
-  buf_count = buf_count + 1
-  return buf
+  output_buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_name(output_buf, 'Command Output')
+  return output_buf
 end
 
 -- default arguments
+---@type CompileCommand.Opts
 M.args = {
   vertical_split = false,
 }
 
+--- Configure the plugin.
+---@param args CompileCommand.Opts Partial options to override the defaults
 function M.setup(args)
   M.args = vim.tbl_deep_extend('force', M.args, args)
 end
 
+-- replace the full contents of a buffer, toggling modifiable around the write
+local function set_buf_lines(buf, lines)
+  vim.api.nvim_set_option_value('modifiable', true, { buf = buf })
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
+end
+
+--- Prompt for a shell command, then run it asynchronously and show its output
+--- in the reused "Command Output" buffer/window.
 function M.prompt()
   local cmd = input('Compile command: ', '', 'shellcmdline')
   if #cmd == 0 then return end
 
-  local cmd_res = vim.fn.systemlist(cmd)
-
-  local buf = create_buf()
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, cmd_res)
-  vim.api.nvim_set_option_value('readonly', true, { buf = buf })
+  local buf = get_or_create_buf()
+  set_buf_lines(buf, { string.format('$ %s', cmd), '', 'Running...' })
 
   local win = get_or_create_window()
   vim.api.nvim_win_set_buf(win, buf)
+
+  -- run through a shell so pipes/globs and shellcmdline completion behave as
+  -- typed; vim.system is async so the editor stays responsive
+  vim.system({ 'sh', '-c', cmd }, { text = true }, function(obj)
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(buf) then return end
+
+      local lines = { string.format('$ %s', cmd), '' }
+      vim.list_extend(lines, vim.split((obj.stdout or '') .. (obj.stderr or ''), '\n'))
+      if obj.code ~= 0 then
+        vim.list_extend(lines, { '', string.format('[exited %d]', obj.code) })
+      end
+
+      set_buf_lines(buf, lines)
+    end)
+  end)
 end
 
 return M
