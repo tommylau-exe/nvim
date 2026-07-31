@@ -40,3 +40,8 @@ vim.keymap.set('n', '<leader>d', ':Ex<cr>', { desc = 'File explorer' })
 
 require('config')
 require('plugins')
+
+-- machine-local config, untracked (via .gitignore)
+if vim.uv.fs_stat(vim.fn.stdpath('config') .. '/lua/config/local.lua') then
+  require('config.local')
+end
