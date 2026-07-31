@@ -6,7 +6,6 @@ MiniMisc.safely('later', function()
   vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files)
   vim.keymap.set('n', '<leader>fw', MiniPick.builtin.grep_live)
   vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
-  vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
   vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
 
   vim.keymap.set('n', '<leader>fc', function()
