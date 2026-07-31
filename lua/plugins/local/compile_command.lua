@@ -17,12 +17,19 @@ local function input(...)
   return result
 end
 
-local function split()
-  if M.args.vertical_split then
-    vim.cmd [[ vsplit ]]
-  else
-    vim.cmd [[ split ]]
+local last_used_window = nil
+local function get_or_create_window()
+  if last_used_window and vim.api.nvim_win_is_valid(last_used_window) then
+    return last_used_window
   end
+
+  if M.args.vertical_split then
+    last_used_window = vim.api.nvim_open_win(0, false, { split = 'right' })
+  else
+    last_used_window = vim.api.nvim_open_win(0, false, { split = 'below' })
+  end
+
+  return last_used_window
 end
 
 local buf_count = 0
@@ -51,18 +58,14 @@ function M.prompt()
   local cmd = input('Compile command: ', '', 'shellcmdline')
   if #cmd == 0 then return end
 
-  split()
+  local cmd_res = vim.fn.systemlist(cmd)
 
   local buf = create_buf()
-  vim.api.nvim_set_current_buf(buf)
-
-  -- explore alternative of using vim.system() and nvim_buf_set_lines()
-  -- the current version has strange behavior if the command contains `!`
-  -- see `:h :r!` for more info
-  vim.cmd(string.format('0r !%s', cmd))
-
-  -- set 'readonly' after modifying the content to avoid warning
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, cmd_res)
   vim.api.nvim_set_option_value('readonly', true, { buf = buf })
+
+  local win = get_or_create_window()
+  vim.api.nvim_win_set_buf(win, buf)
 end
 
 return M
