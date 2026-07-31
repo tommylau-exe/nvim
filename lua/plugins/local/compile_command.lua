@@ -54,10 +54,11 @@ M.args = {
   vertical_split = false,
 }
 
---- Configure the plugin.
----@param args CompileCommand.Opts Partial options to override the defaults
+--- Configure the plugin and bind its <leader>x mapping.
+---@param args? CompileCommand.Opts Partial options to override the defaults
 function M.setup(args)
-  M.args = vim.tbl_deep_extend('force', M.args, args)
+  M.args = vim.tbl_deep_extend('force', M.args, args or {})
+  vim.keymap.set('n', '<leader>x', M.prompt, { desc = 'Compile command' })
 end
 
 -- replace the full contents of a buffer, toggling modifiable around the write
