@@ -24,19 +24,7 @@ vim.diagnostic.config({
   },
 })
 
--- if supported by lsp, overwrite <leader>w mapping to format on save
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if not client then return end
-    if not client:supports_method('textDocument/formatting', ev.buf) then return end
-
-    vim.keymap.set('n', '<leader>w', function()
-      vim.lsp.buf.format({ bufnr = ev.buf, id = ev.data.client_id })
-      vim.cmd('write')
-    end, { buffer = ev.buf, desc = 'Format and write' })
-  end,
-})
+-- <leader>w formats and writes; see lua/plugins/local/format.lua (bound in init.lua)
 
 -- if supported by lsp, enable inline hints
 vim.api.nvim_create_autocmd('LspAttach', {

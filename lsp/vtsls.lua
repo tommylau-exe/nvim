@@ -15,4 +15,8 @@ return {
     'jsconfig.json',
     '.git',
   },
+  settings = {
+    -- prefer the project's TypeScript over vtsls's bundled (older) one
+    vtsls = { autoUseWorkspaceTsdk = true },
+  },
 }
