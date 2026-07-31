@@ -1,17 +1,17 @@
--- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath('data') .. '/site'
-local mini_path = path_package .. '/pack/deps/start/mini.nvim'
-if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
-  local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/nvim-mini/mini.nvim', mini_path
-  }
-  vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
-  vim.cmd('echo "Installed `mini.nvim`" | redraw')
-end
-require('mini.deps').setup()
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then
+      if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+      vim.cmd('TSUpdate')
+    end
+  end
+})
+
+vim.pack.add({
+  'https://github.com/nvim-mini/mini.nvim',
+  'https://github.com/folke/tokyonight.nvim',
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+})
 
 require('plugins.remote.mini')
 require('plugins.remote.theme')

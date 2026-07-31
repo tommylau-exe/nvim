@@ -1,3 +1,5 @@
+require('mini.misc').setup()
+
 require('plugins.remote.mini.ai')
 require('plugins.remote.mini.completion')
 require('plugins.remote.mini.extra')

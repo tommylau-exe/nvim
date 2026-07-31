@@ -1,4 +1,4 @@
-MiniDeps.later(function()
+MiniMisc.safely('later', function()
   require('mini.pick').setup()
   vim.ui.select = MiniPick.ui_select
 

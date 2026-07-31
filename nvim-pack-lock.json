@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "mini.nvim": {
+      "rev": "8bf5c57bc82dd590932faa41bfde9fd6d40a9433",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-treesitter": {
+      "rev": "0f32dff7f19476629c77467f887b95e5e2d33509",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    }
+  }
+}
