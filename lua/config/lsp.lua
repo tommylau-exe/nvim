@@ -10,6 +10,10 @@ vim.lsp.config('*', {
 
 vim.diagnostic.config({
   virtual_text = true,
+  -- show the full (possibly multi-line) diagnostic for the cursor's line
+  virtual_lines = { current_line = true },
+  -- open the float automatically when jumping with ]d / [d
+  jump = { float = true },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '',
