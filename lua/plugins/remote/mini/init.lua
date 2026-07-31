@@ -2,6 +2,7 @@ require('mini.misc').setup()
 
 require('plugins.remote.mini.ai')
 require('plugins.remote.mini.completion')
+require('plugins.remote.mini.diff')
 require('plugins.remote.mini.extra')
 require('plugins.remote.mini.git')
 require('plugins.remote.mini.icons')
