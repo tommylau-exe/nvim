@@ -13,6 +13,7 @@ MiniMisc.safely('later', function()
     'python',
     'query',
     'ruby',
+    'tsx',
     'typescript',
     'vim',
     'vimdoc',
