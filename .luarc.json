@@ -8,8 +8,8 @@
     "library": [
       "$VIMRUNTIME",
       "${3rd}/luv/library",
-      "$HOME/.local/share/nvim/site/pack/deps/opt",
-      "$HOME/.local/share/nvim/site/pack/deps/start"
+      "$HOME/.local/share/nvim/site/pack/core/opt",
+      "$HOME/.local/share/nvim/site/pack/core/start"
     ]
   }
 }
