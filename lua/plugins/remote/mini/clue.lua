@@ -35,6 +35,7 @@ MiniMisc.safely('later', function()
     },
 
     clues = {
+      { mode = 'n', keys = '<leader>b', desc = '+buffer' },
       { mode = 'n', keys = '<leader>f', desc = '+find' },
       { mode = 'n', keys = '<leader>g', desc = '+git' },
 

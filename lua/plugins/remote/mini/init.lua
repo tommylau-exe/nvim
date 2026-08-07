@@ -1,6 +1,7 @@
 require('mini.misc').setup()
 
 require('plugins.remote.mini.ai')
+require('plugins.remote.mini.bufremove')
 require('plugins.remote.mini.clue')
 require('plugins.remote.mini.completion')
 require('plugins.remote.mini.diff')

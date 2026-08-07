@@ -1,0 +1,10 @@
+MiniMisc.safely('later', function()
+  require('mini.bufremove').setup()
+
+  vim.keymap.set('n', '<leader>bd', function()
+    MiniBufremove.delete(vim.api.nvim_get_current_buf())
+  end, { desc = 'Delete current buffer' })
+  vim.keymap.set('n', '<leader>bh', function()
+    MiniBufremove.unshow(vim.api.nvim_get_current_buf())
+  end, { desc = 'Hide current buffer' })
+end)
